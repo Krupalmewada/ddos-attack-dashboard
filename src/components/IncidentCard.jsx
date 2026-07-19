@@ -1,12 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 const timeAgo = (dateStr) => {
-  const diff = Date.now() - new Date(dateStr).getTime()
-  const hours = Math.floor(diff / 3600000)
-  const days = Math.floor(hours / 24)
-  if (days > 0) return `${days}d ago`
+    const diff = Date.now() - new Date(dateStr).getTime()
+    const hours = Math.floor(diff / 3600000)
+    const days = Math.floor(hours / 24)
+    if (days > 0) return `${days}d ago`
   if (hours > 0) return `${hours}h ago`
   return 'Just now'
 }
 export default function IncidentCard({ incident }) {
+  const navigate = useNavigate()
   const severityColors = {
     'Critical': 'bg-red-500',
     'High': 'bg-orange-500',
@@ -25,9 +28,8 @@ export default function IncidentCard({ incident }) {
     'Protocol': '⚡',
     'Application-layer': '🎯',
   }
-
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 hover:border-slate-500 transition cursor-pointer">
+    <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 hover:border-slate-500 transition cursor-pointer" onClick={() => navigate(`/incidents/${incident.id}`)}>
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 mt-1 ${severityColors[incident.severity]}`} />

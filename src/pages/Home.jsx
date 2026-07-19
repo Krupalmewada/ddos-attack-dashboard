@@ -3,7 +3,6 @@ import IncidentCard from "../components/IncidentCard"
 
 export default function Home() {
   const { incidents, loading, error } = useIncidents()
-
   if (loading) return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center">
       <p className="text-slate-400">Loading incidents...</p>
@@ -22,7 +21,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-900 px-6 py-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto" >
         
         {/* Header */}
         <div className="mb-8">
