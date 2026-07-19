@@ -1,17 +1,14 @@
-import { supabase } from './lib/supabase'
-import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
 
 function App() {
-  useEffect(() => {
-    const test = async () => {
-      const { data, error } = await supabase.from('incidents').select('*').limit(3)
-      console.log('data:', data)
-      console.log('error:', error)
-    }
-    test()
-  }, [])
-
-  return <div>Testing Supabase connection...</div>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App
