@@ -1,13 +1,23 @@
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 export default function Navbar() {
   const navigate = useNavigate()
   const location = useLocation()
+  const [session, setSession] = useState(null)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSession(data.session))
+    supabase.auth.onAuthStateChange((_event, session) => setSession(session))
+  }, [])
 
   const links = [
     { path: '/', label: 'Dashboard' },
     { path: '/dashboard', label: 'Analytics' },
-    { path: '/admin', label: 'Admin' },
+    session
+      ? { path: '/admin', label: 'Admin' }
+      : { path: '/login', label: 'Login' },
   ]
 
   return (

@@ -1,6 +1,6 @@
 import {useState,useEffect} from'react';
 import { supabase } from '../lib/supabase'
-export default function useIncidents(){
+export default function useIncidents(refetchTrigger = 0){
 const [incidents , setIncidents] = useState(null);
 const [loading, setLoading] = useState(false);
 const [error, setError ] = useState(null);
@@ -19,7 +19,7 @@ useEffect(()=>{
       }
     }
     fetchdata();
-    },[])
+    },[refetchTrigger])
     
     return {incidents,loading,error}
 }
